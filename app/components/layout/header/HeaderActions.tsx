@@ -1,38 +1,75 @@
+import { useState } from "react";
 import { Link } from "react-router";
-import { Search, User, ShoppingCart, MenuIcon } from "lucide-react";
+import { Search, User, ShoppingCart, Menu } from "lucide-react";
 import { useCart } from "~/contexts/CartContext";
-
-const actions = [
-    { to: "/search", label: "Search", icon: Search, desktopOnly: true, mobileOnly: false },
-    { to: "/account", label: "Account", icon: User, desktopOnly: true, mobileOnly: false },
-    { to: "/cart", label: "Cart", icon: ShoppingCart, desktopOnly: true, mobileOnly: false },
-    { to: "/menu", label: "Menu", icon: MenuIcon, desktopOnly: false, mobileOnly: true },
-];
+import MobileMenu from "~/components/ui/MobileMenu";
 
 const HeaderActions = () => {
     const { totalItems } = useCart();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const openMobileMenu = () => setIsMobileMenuOpen(true);
+    const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
     return (
-        <nav className="flex items-center gap-4" aria-label="secondary">
-            <ul className="flex space-x-4">
-                {actions.map(({ label, to, icon: Icon, desktopOnly, mobileOnly }) => (
-                    <li key={label}>
+        <>
+            <nav className="flex items-center gap-4" aria-label="User actions">
+                {/* Desktop Actions */}
+                <ul className="hidden lg:flex space-x-4">
+                    <li>
                         <Link
-                            to={to}
-                            aria-label={label}
-                            className={`relative ${desktopOnly ? "hidden lg:flex" : "flex lg:hidden"}`}
+                            to="/search"
+                            aria-label="Search"
+                            className="p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
                         >
-                            <Icon className={`${mobileOnly ? "h-6 w-6" : "h-5 w-5"}`} />
-                            {label === "Cart" && totalItems > 0 && (
-                                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                                    {totalItems}
+                            <Search className="h-5 w-5" aria-hidden="true" />
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/account"
+                            aria-label="Account"
+                            className="p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                        >
+                            <User className="h-5 w-5" aria-hidden="true" />
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/cart"
+                            aria-label={`Shopping cart with ${totalItems} items`}
+                            className="relative p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                        >
+                            <ShoppingCart className="h-5 w-5" aria-hidden="true" />
+                            {totalItems > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                                    {totalItems > 99 ? '99+' : totalItems}
                                 </span>
                             )}
                         </Link>
                     </li>
-                ))}
-            </ul>
-        </nav>
+                </ul>
+
+                {/* Mobile Menu Trigger */}
+                <div className="lg:hidden" role="navigation" aria-label="Mobile menu">
+                    <button
+                        onClick={openMobileMenu}
+                        aria-label="Open navigation menu"
+                        aria-expanded={isMobileMenuOpen}
+                        aria-controls="mobile-menu"
+                        className="p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                    >
+                        <Menu className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                </div>
+            </nav>
+
+            {/* Mobile Menu */}
+            <MobileMenu
+                isOpen={isMobileMenuOpen}
+                onClose={closeMobileMenu}
+            />
+        </>
     )
 }
 

@@ -12,7 +12,7 @@ const ProductInfo = ({ product }: { product: Product }) => {
             <div className="mt-6 w-full">
                 <AddToCartButton product={product} className="w-full" />
             </div>
-            <Divider variant="dark" spacing="large" />
+            <Divider spacing="large" />
             <ProductDescription description={product.description} />
         </section>
     )

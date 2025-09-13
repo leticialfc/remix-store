@@ -23,7 +23,7 @@ export default function AddToCartButton({
     };
 
     return (
-        <Button onClick={handleAddToCart} {...buttonProps}>
+        <Button onClick={handleAddToCart} radius="none" {...buttonProps}>
             {text}
         </Button>
     );

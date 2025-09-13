@@ -43,7 +43,7 @@ const Divider = ({
                 return ''; // Let className handle all styling
             case 'gray':
             default:
-                return 'border-gray-300';
+                return 'border-gray-500';
         }
     };
 

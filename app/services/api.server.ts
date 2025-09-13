@@ -70,7 +70,7 @@ export async function getProduct(productId: string): Promise<Product> {
 
 export async function getAllProducts(): Promise<ProductsResponse> {
   try {
-    const response = await fetch("https://dummyjson.com/products");
+    const response = await fetch("https://dummyjson.com/products?limit=100");
 
     if (!response.ok) {
       throw new Error(

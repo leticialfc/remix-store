@@ -20,6 +20,16 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
      * Whether the button should take full width
      */
     fullWidth?: boolean;
+    /**
+     * Border radius style. Defaults to 'medium'.
+     * - 'none': No border radius (sharp corners)
+     * - 'small': Small border radius (rounded-sm)
+     * - 'medium': Medium border radius (rounded-md)
+     * - 'large': Large border radius (rounded-lg)
+     * - 'xl': Extra large border radius (rounded-xl)
+     * - 'full': Fully rounded (rounded-full, pill shape)
+     */
+    radius?: 'none' | 'small' | 'medium' | 'large' | 'xl' | 'full';
 }
 
 export default function Button({
@@ -27,6 +37,7 @@ export default function Button({
     variant = 'dark',
     size = 'medium',
     fullWidth = false,
+    radius = 'medium',
     className = '',
     ...props
 }: ButtonProps) {
@@ -60,14 +71,33 @@ export default function Button({
         }
     };
 
-    const baseClasses = 'font-medium rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
+    const getRadiusClasses = () => {
+        switch (radius) {
+            case 'none':
+                return 'rounded-none';
+            case 'small':
+                return 'rounded-sm';
+            case 'large':
+                return 'rounded-lg';
+            case 'xl':
+                return 'rounded-xl';
+            case 'full':
+                return 'rounded-full';
+            case 'medium':
+            default:
+                return 'rounded-md';
+        }
+    };
+
+    const baseClasses = 'font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
     const variantClasses = variant === 'custom' ? '' : getVariantClasses();
     const sizeClasses = getSizeClasses();
+    const radiusClasses = getRadiusClasses();
     const widthClasses = fullWidth ? 'w-full' : '';
 
     return (
         <button
-            className={`${baseClasses} ${variantClasses} ${sizeClasses} ${widthClasses} ${className}`}
+            className={`${baseClasses} ${variantClasses} ${sizeClasses} ${radiusClasses} ${widthClasses} ${className}`}
             {...props}
         >
             {children}
