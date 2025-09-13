@@ -49,8 +49,12 @@ export default function App() {
     <CartProvider>
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1 px-3 lg:px-14 mt-8 mb-8 max-w-screen-2xl mx-auto">
-          <Outlet />
+        <main className="flex-1 px-4 py-6 lg:px-14">
+          <div className="max-w-screen-2xl mx-auto">
+            <div className="w-full flex items-center justify-between">
+              <Outlet />
+            </div>
+          </div>
         </main>
         <Footer />
       </div>

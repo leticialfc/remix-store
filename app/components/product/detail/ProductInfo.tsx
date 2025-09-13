@@ -12,7 +12,7 @@ const ProductInfo = ({ product }: { product: Product }) => {
             <div className="mt-6 w-full">
                 <AddToCartButton product={product} className="w-full" />
             </div>
-            <Divider />
+            <Divider variant="dark" spacing="large" />
             <ProductDescription description={product.description} />
         </section>
     )
@@ -40,7 +40,7 @@ const ProductPrice = ({ price }: { price: number }) => {
 
 const ProductDescription = ({ description }: { description: string }) => {
     return (
-        <div className="mt-4 pt-4 flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
             <div>Product Details</div>
             <div>{description}</div>
         </div>

@@ -7,7 +7,7 @@ const Header = () => {
         <header className="border-b border-gray-950 px-4 py-6 lg:px-14">
             <div className="max-w-screen-2xl mx-auto">
                 <div className="w-full flex items-center justify-between">
-                    <HeaderLogo /><Navigation /><HeaderActions />
+                    <HeaderLogo text={"The Online Store".toLocaleUpperCase()} /><Navigation /><HeaderActions />
                 </div>
             </div>
         </header>
