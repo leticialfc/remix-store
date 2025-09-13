@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Search, User, ShoppingCart, MenuIcon } from "lucide-react";
+import { useCart } from "~/contexts/CartContext";
 
 const actions = [
     { to: "/search", label: "Search", icon: Search, desktopOnly: true, mobileOnly: false },
@@ -9,6 +10,8 @@ const actions = [
 ];
 
 const HeaderActions = () => {
+    const { totalItems } = useCart();
+
     return (
         <nav className="flex items-center gap-4" aria-label="secondary">
             <ul className="flex space-x-4">
@@ -17,9 +20,14 @@ const HeaderActions = () => {
                         <Link
                             to={to}
                             aria-label={label}
-                            className={`${desktopOnly ? "hidden lg:flex" : "flex lg:hidden"}`}
+                            className={`relative ${desktopOnly ? "hidden lg:flex" : "flex lg:hidden"}`}
                         >
-                            <Icon className={`${mobileOnly ? "h-6 w-6" : "h-4 w-4"}`} />
+                            <Icon className={`${mobileOnly ? "h-6 w-6" : "h-5 w-5"}`} />
+                            {label === "Cart" && totalItems > 0 && (
+                                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                    {totalItems}
+                                </span>
+                            )}
                         </Link>
                     </li>
                 ))}

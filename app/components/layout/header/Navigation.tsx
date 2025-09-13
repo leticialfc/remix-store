@@ -11,7 +11,7 @@ const routes = [
 const Navigation = () => {
     return (
         <nav className="hidden lg:flex" aria-label="primary">
-            <ul className="flex space-x-4">
+            <ul className="flex gap-10">
                 {routes.map((route) => (
                     <li key={route.name}>
                         <Link key={route.name} to={route.path}>{route.name}</Link>

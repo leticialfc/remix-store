@@ -9,8 +9,9 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
+import Header from "./components/layout/header/Header";
+import Footer from "./components/layout/footer/Footer";
+import { CartProvider } from "./contexts/CartContext";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -45,13 +46,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1 px-3 lg:px-14 mt-14">
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
+    <CartProvider>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1 px-3 lg:px-14 mt-8 mb-8 max-w-screen-2xl mx-auto">
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </CartProvider>
   );
 }
 
