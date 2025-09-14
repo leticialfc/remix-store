@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react";
 import { X } from "lucide-react";
-import HeaderLogo from "../layout/header/HeaderLogo";
-import Navigation from "../layout/header/Navigation";
-import HeaderActionsContent from "../layout/header/HeaderActionsContent";
+import HeaderLogo from "../header/HeaderLogo";
+import HeaderNavigation from "../header/HeaderNavigation";
+import HeaderActionsContent from "../header/HeaderActionsContent";
 
 interface MobileMenuHeaderProps {
     isOpen: boolean;

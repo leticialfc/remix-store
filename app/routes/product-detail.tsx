@@ -1,6 +1,6 @@
 import { getProduct } from "~/services/api.server";
 import type { Route } from "./+types/product-detail";
-import ProductImage from "~/components/ui/ProductImage";
+import ProductImage from "~/components/product/ProductImage";
 import ProductInfo from "~/components/product/detail/ProductInfo";
 import { data } from "react-router";
 

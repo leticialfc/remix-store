@@ -12,7 +12,7 @@ const routes = [
     { name: "Blog", path: "/blog" }
 ];
 
-const Navigation = ({ className = "" }: NavigationProps) => {
+const HeaderNavigation = ({ className = "" }: NavigationProps) => {
     const location = useLocation();
 
     return (
@@ -28,4 +28,4 @@ const Navigation = ({ className = "" }: NavigationProps) => {
     )
 }
 
-export default Navigation;
+export default HeaderNavigation;

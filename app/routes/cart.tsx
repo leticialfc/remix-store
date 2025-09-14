@@ -1,7 +1,7 @@
 import type { Route } from "./+types/cart";
 import { useCart } from "~/contexts/CartContext";
 import { Link } from "react-router";
-import Button from "~/components/ui/Button";
+import Button from "~/components/common/Button";
 import CartItem from "~/components/cart/CartItem";
 import CartSummary from "~/components/cart/CartSummary";
 

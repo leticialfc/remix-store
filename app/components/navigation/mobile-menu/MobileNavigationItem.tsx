@@ -31,7 +31,7 @@ export default function MobileNavigationItem({
             <Link
                 to={item.path}
                 onClick={onClose}
-                className={`block p-4 rounded-lg hover:bg-stone-50 ${location.pathname === item.path ? 'bg-stone-100' : ''}`}
+                className={`block p-4 rounded-lg hover:bg-stone-50 transition-colors group ${location.pathname === item.path ? 'bg-stone-100' : ''}`}
             >
                 <div className="font-semibold text-xl">
                     {item.name}

@@ -1,6 +1,6 @@
 import ProductGrid from "~/components/product/grid/ProductGrid";
 import Pagination from "~/components/product/grid/Pagination";
-import Button from "~/components/ui/Button";
+import Button from "~/components/common/Button";
 import type { Product } from "~/services/api.server";
 
 interface ProductDisplayProps {

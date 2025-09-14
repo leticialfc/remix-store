@@ -9,7 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import Header from "./components/layout/header/Header";
+import Header from "./components/navigation/header/Header";
 import { CartProvider } from "./contexts/CartContext";
 
 export const links: Route.LinksFunction = () => [

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Divider from "~/components/ui/Divider";
+import Divider from "~/components/common/Divider";
 import { capitalize } from "~/utils/capitalize";
 
 interface FilterSidebarProps {

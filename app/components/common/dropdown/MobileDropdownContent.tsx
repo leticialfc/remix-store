@@ -1,4 +1,4 @@
-import MobileModal from "../MobileModal";
+import MobileModal from "~/components/modal/MobileModal";
 import MobileDropdownOption from "./MobileDropdownOption";
 
 interface MobileDropdownContentProps {

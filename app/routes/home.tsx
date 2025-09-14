@@ -5,8 +5,8 @@ import FilterSidebar from "~/components/product/grid/FilterSidebar";
 import ControlsBar from "~/components/product/grid/ControlsBar";
 import ProductDisplay from "~/components/product/grid/ProductDisplay";
 import EmptyState from "~/components/product/grid/EmptyState";
-import BackToTopButton from "~/components/ui/BackToTopButton";
-import LoadingFallback from "~/components/ui/LoadingFallback";
+import BackToTopButton from "~/components/common/BackToTopButton";
+import LoadingFallback from "~/components/common/LoadingFallback";
 import type { Product } from "~/services/api.server";
 
 export function meta({ }: Route.MetaArgs) {

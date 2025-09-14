@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu } from "lucide-react";
-import MobileMenu from "~/components/ui/MobileMenu";
+import MobileMenu from "~/components/navigation/mobile-menu/MobileMenu";
 import HeaderActionsContent from "./HeaderActionsContent";
 
 const HeaderActions = () => {

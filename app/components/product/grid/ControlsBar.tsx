@@ -1,4 +1,4 @@
-import Dropdown from "~/components/ui/Dropdown";
+import Dropdown from "~/components/common/Dropdown";
 import { capitalize } from "~/utils/capitalize";
 
 interface ControlsBarProps {

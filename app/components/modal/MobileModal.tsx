@@ -1,9 +1,9 @@
 import { createPortal } from "react-dom";
 import type { ReactNode } from "react";
 import { useMobileModal } from "~/hooks/useMobileModal";
-import ModalBackdrop from "./modal/ModalBackdrop";
-import ModalHeader from "./modal/ModalHeader";
-import ModalSheet from "./modal/ModalSheet";
+import ModalBackdrop from "./ModalBackdrop";
+import ModalHeader from "./ModalHeader";
+import ModalSheet from "./ModalSheet";
 
 interface MobileModalProps {
     isOpen: boolean;
