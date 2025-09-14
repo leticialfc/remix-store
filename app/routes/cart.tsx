@@ -2,8 +2,8 @@ import type { Route } from "./+types/cart";
 import { useCart } from "~/contexts/CartContext";
 import { Link } from "react-router";
 import Button from "~/components/ui/Button";
-import CartItem from "~/components/ui/CartItem";
-import CartSummary from "~/components/ui/CartSummary";
+import CartItem from "~/components/cart/CartItem";
+import CartSummary from "~/components/cart/CartSummary";
 
 export function meta({ }: Route.MetaArgs) {
     return [

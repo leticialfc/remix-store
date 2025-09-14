@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import ProductGrid from "~/components/product/grid/ProductGrid";
 import Pagination from "~/components/product/grid/Pagination";
 import FilterSidebar from "~/components/product/grid/FilterSidebar";
-import SortDropdown from "~/components/product/grid/SortDropdown";
+import Dropdown from "~/components/ui/Dropdown";
 import Button from "~/components/ui/Button";
 import { ChevronUp } from "lucide-react";
 import type { Product } from "~/services/api.server";
@@ -43,11 +43,12 @@ const sortOptions = [
 ];
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-  const { products, total } = loaderData;
+  const { products } = loaderData;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState('title-asc');
   const [isMobile, setIsMobile] = useState(false);
+  const [isMediumScreen, setMediumScreen] = useState(false);
   const [loadedItems, setLoadedItems] = useState(ITEMS_PER_PAGE);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
@@ -175,29 +176,30 @@ export default function Home({ loaderData }: Route.ComponentProps) {
         <div className="lg:col-span-3">
           {/* Controls Bar */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-            <SortDropdown
-              options={sortOptions}
-              value={sortBy}
-              onChange={handleSortChange}
-              className="w-full sm:w-auto min-w-[200px]"
-            />
+            <div className="flex gap-4 w-full">
+              <Dropdown
+                mode="single"
+                title="Sort by"
+                options={sortOptions}
+                value={sortBy}
+                onChange={handleSortChange}
+              />
 
-            <div className="text-sm text-gray-600">
+              {/* Category filter dropdown for mobile */}
+              <div className="block lg:hidden">
+                <Dropdown
+                  mode="multi"
+                  title="Categories"
+                  options={categories.map(cat => ({ value: cat, label: cat.charAt(0).toUpperCase() + cat.slice(1) }))}
+                  selectedValues={selectedCategories}
+                  onChange={handleCategoryChange}
+                />
+              </div>
+            </div>
+
+            <div className="text-sm text-gray-600 whitespace-nowrap">
               Showing {startItem}-{endItem} of {filteredAndSortedProducts.length}
             </div>
-          </div>
-
-          {/* Mobile Filter Button - Show only on mobile */}
-          <div className="lg:hidden mb-6">
-            <button
-              className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-              onClick={() => {
-                // Could implement a modal or drawer for mobile filters
-                alert('Mobile filter modal would open here');
-              }}
-            >
-              Filters {selectedCategories.length > 0 && `(${selectedCategories.length})`}
-            </button>
           </div>
 
           {/* Product Grid */}

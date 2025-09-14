@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { Search, User, ShoppingCart, Menu } from "lucide-react";
-import { useCart } from "~/contexts/CartContext";
+import { Search, User, Menu } from "lucide-react";
 import MobileMenu from "~/components/ui/MobileMenu";
-import Cart from "~/routes/cart";
-import CartLink from "~/components/ui/CartLink";
+import CartLink from "~/components/cart/CartLink";
 
 const HeaderActions = () => {
-    const { totalItems } = useCart();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const openMobileMenu = () => setIsMobileMenuOpen(true);
@@ -17,7 +14,7 @@ const HeaderActions = () => {
         <>
             <nav className="flex items-center gap-4" aria-label="User actions">
                 {/* Desktop Actions */}
-                <ul className="hidden lg:flex space-x-2">
+                <ul className="flex space-x-2">
                     <li className="flex">
                         <Link
                             to="/search"

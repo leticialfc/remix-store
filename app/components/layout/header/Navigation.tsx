@@ -1,5 +1,9 @@
 import { Link } from "react-router";
 
+interface NavigationProps {
+    className?: string;
+}
+
 const routes = [
     { name: "Home", path: "/" },
     { name: "Shop", path: "/shop" },
@@ -8,9 +12,9 @@ const routes = [
     { name: "Blog", path: "/blog" }
 ];
 
-const Navigation = () => {
+const Navigation = ({ className = "" }: NavigationProps) => {
     return (
-        <nav className="hidden lg:flex" aria-label="Primary navigation">
+        <nav className={`flex ${className}`} aria-label="Primary navigation">
             <ul className="flex gap-10">
                 {routes.map((route) => (
                     <li key={route.name}>

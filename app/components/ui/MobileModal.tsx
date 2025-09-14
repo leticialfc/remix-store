@@ -1,23 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
-import { Link } from "react-router";
-import HeaderLogo from "../layout/header/HeaderLogo";
-import Button from "./Button";
-import Header from "../layout/header/Header";
+import type { ReactNode } from "react";
 
-interface MobileMenuProps {
+interface MobileModalProps {
     isOpen: boolean;
     onClose: () => void;
+    title: string;
+    children: ReactNode;
+    className?: string;
 }
 
-const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
+const MobileModal = ({ isOpen, onClose, title, children, className = "" }: MobileModalProps) => {
     const [isVisible, setIsVisible] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
-    const menuRef = useRef<HTMLDivElement>(null);
+    const modalRef = useRef<HTMLDivElement>(null);
     const closeButtonRef = useRef<HTMLButtonElement>(null);
     const lastFocusedElement = useRef<HTMLElement | null>(null);
 
-    // Handle menu open/close animations
+    // Handle modal open/close animations
     useEffect(() => {
         if (isOpen) {
             setIsVisible(true);
@@ -38,12 +38,12 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
             // Restore body scroll
             document.body.style.overflow = '';
 
-            // Return focus to the element that opened the menu
+            // Return focus to the element that opened the modal
             if (lastFocusedElement.current) {
                 lastFocusedElement.current.focus();
             }
 
-            // Hide menu after animation
+            // Hide modal after animation
             setTimeout(() => {
                 setIsVisible(false);
                 setIsAnimating(false);
@@ -72,17 +72,17 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
         return () => document.removeEventListener('keydown', handleEscape);
     }, [isOpen, onClose]);
 
-    // Trap focus within menu
+    // Trap focus within modal
     useEffect(() => {
         if (!isOpen || isAnimating) return;
 
         const handleTabKey = (event: KeyboardEvent) => {
             if (event.key !== 'Tab') return;
 
-            const menu = menuRef.current;
-            if (!menu) return;
+            const modal = modalRef.current;
+            if (!modal) return;
 
-            const focusableElements = menu.querySelectorAll(
+            const focusableElements = modal.querySelectorAll(
                 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
             );
             const firstElement = focusableElements[0] as HTMLElement;
@@ -107,56 +107,50 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
 
     if (!isVisible) return null;
 
-    const navigationItems = [
-        { name: "Home", path: "/" },
-        { name: "Shop", path: "/shop" },
-        { name: "About", path: "/about" },
-        { name: "Contact", path: "/contact" },
-        { name: "Blog", path: "/blog" }
-    ];
-
     return (
-        <div
-            ref={menuRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="mobile-menu-title"
-            className={`fixed inset-0 bg-white z-50 lg:hidden transition-all duration-300 ease-in-out ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                }`}
-        >
-            <Header />
-            {/* Content */}
-            <div className="flex-1 overflow-y-auto p-4">
-                <nav className="space-y-8" aria-label="Mobile navigation">
-                    {/* Main Navigation */}
-                    <section>
-                        <ul className="space-y-1">
-                            {navigationItems.map((item, index) => (
-                                <li
-                                    key={item.name}
-                                    className={`transform transition-all duration-300 ease-out ${isOpen
-                                        ? 'translate-y-0 opacity-100'
-                                        : 'translate-y-6 opacity-0'
-                                        }`}
-                                    style={{ transitionDelay: `${250 + index * 50}ms` }}
-                                >
-                                    <Link
-                                        to={item.path}
-                                        onClick={onClose}
-                                        className="block p-4 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors group"
-                                    >
-                                        <div className="font-semibold text-xl text-gray-900 group-hover:text-blue-600 transition-colors">
-                                            {item.name}
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
-                </nav>
+        <>
+            {/* Backdrop */}
+            <div
+                className={`fixed inset-0 bg-black z-40 lg:hidden transition-opacity duration-300 ease-in-out ${isOpen ? 'opacity-50' : 'opacity-0'
+                    }`}
+                onClick={onClose}
+                aria-hidden="true"
+            />
+
+            {/* Modal */}
+            <div
+                ref={modalRef}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-title"
+                className={`fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl shadow-2xl z-50 lg:hidden transition-transform duration-300 ease-out max-h-[80vh] ${isOpen ? 'translate-y-0' : 'translate-y-full'
+                    } ${className}`}
+            >
+                {/* Header */}
+                <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-white rounded-t-3xl">
+                    <h2
+                        id="modal-title"
+                        className="text-xl font-bold text-gray-900"
+                    >
+                        {title}
+                    </h2>
+                    <button
+                        ref={closeButtonRef}
+                        onClick={onClose}
+                        className="p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                        aria-label={`Close ${title.toLowerCase()}`}
+                    >
+                        <X className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 overflow-y-auto">
+                    {children}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
-export default MobileMenu;
+export default MobileModal;

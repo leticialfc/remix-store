@@ -1,9 +1,9 @@
 import { useCart } from "~/contexts/CartContext";
 import type { Product } from "~/services/api.server";
-import Button from "./Button";
-import QuantityPicker from "./QuantityPicker";
+import Button from "../ui/Button";
+import QuantityPicker from "../ui/QuantityPicker";
 import { Trash2 as Trash } from "lucide-react";
-import ProductImage from "./ProductImage";
+import ProductImage from "../ui/ProductImage";
 
 interface CartItem extends Product {
     quantity: number;
