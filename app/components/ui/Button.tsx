@@ -100,7 +100,7 @@ export default function Button({
         }
     };
 
-    const baseClasses = 'font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2';
+    const baseClasses = 'font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer';
 
     // Icon buttons get additional centering classes
     const iconClasses = variant === 'icon' ? 'flex items-center justify-center' : '';

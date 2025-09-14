@@ -5,9 +5,6 @@ import type { ComponentProps } from 'react';
 
 interface AddToCartButtonProps extends Omit<ComponentProps<typeof Button>, 'onClick' | 'children'> {
     product: Product;
-    /**
-     * Custom text for the button. Defaults to "Add to Cart"
-     */
     text?: string;
 }
 
