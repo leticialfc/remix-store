@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { Link } from "react-router";
 import HeaderLogo from "../layout/header/HeaderLogo";
-import CartLink from "./CartLink";
 
 interface MobileMenuProps {
     isOpen: boolean;

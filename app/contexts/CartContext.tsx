@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { Product } from '~/services/api.server';
 
@@ -18,8 +18,37 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+const CART_STORAGE_KEY = 'remix-store-cart';
+
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
+    const [isHydrated, setIsHydrated] = useState(false);
+
+    // Load cart from localStorage on mount
+    useEffect(() => {
+        try {
+            const savedCart = localStorage.getItem(CART_STORAGE_KEY);
+            if (savedCart) {
+                const parsedCart = JSON.parse(savedCart);
+                setItems(parsedCart);
+            }
+        } catch (error) {
+            console.error('Failed to load cart from localStorage:', error);
+        } finally {
+            setIsHydrated(true);
+        }
+    }, []);
+
+    // Save cart to localStorage whenever items change
+    useEffect(() => {
+        if (isHydrated) {
+            try {
+                localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+            } catch (error) {
+                console.error('Failed to save cart to localStorage:', error);
+            }
+        }
+    }, [items, isHydrated]);
 
     const addToCart = (product: Product) => {
         setItems(prev => {
