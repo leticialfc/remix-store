@@ -21,9 +21,9 @@ export default function Cart() {
 
     if (items.length === 0) {
         return (
-            <div className="w-full text-center py-12">
-                <h1 className="text-2xl font-bold mb-4">Your cart is empty</h1>
-                <p className="text-gray-600 mb-6">Add some products to get started!</p>
+            <div className="w-full text-center py-8">
+                <h1 className="text-xl font-semibold mb-2">Your cart is empty</h1>
+                <p className="text-gray-700 mb-8">Add some products to get started!</p>
                 <Link to="/">
                     <Button>
                         Continue Shopping
@@ -34,8 +34,6 @@ export default function Cart() {
     }
 
     return (
-
-
         <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Cart Items */}
             <div className="lg:col-span-2">
