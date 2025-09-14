@@ -19,7 +19,7 @@ const HeaderNavigation = ({ className = "" }: NavigationProps) => {
         <nav className={`flex ${className}`} aria-label="Primary navigation">
             <ul className="flex gap-8">
                 {routes.map((route) => (
-                    <li key={route.name} className={`${location.pathname === route.path ? 'border-b' : 'hover:border-b border-transparent hover:border-gray-300'} transition-colors`}>
+                    <li key={route.name} className={`border-b transition-colors ${location.pathname !== route.path ? 'border-transparent hover:border-gray-300' : ''}`}>
                         <Link key={route.name} to={route.path}>{route.name}</Link>
                     </li>
                 ))}
