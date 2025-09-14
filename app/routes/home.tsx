@@ -1,15 +1,16 @@
 import { getAllProducts } from "~/services/api.server";
 import type { Route } from "./+types/home";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import ProductGrid from "~/components/product/grid/ProductGrid";
 import Pagination from "~/components/product/grid/Pagination";
 import FilterSidebar from "~/components/product/grid/FilterSidebar";
 import SortDropdown from "~/components/product/grid/SortDropdown";
+import Button from "~/components/ui/Button";
 import type { Product } from "~/services/api.server";
 
 export function meta({ }: Route.MetaArgs) {
   return [
-    { title: "Simple Online Store" },
+    { title: "The Online Store" },
     { name: "description", content: "Browse our collection of products. View details and add items to your cart for a seamless shopping experience." },
   ];
 }
@@ -45,6 +46,18 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState('title-asc');
+  const [isMobile, setIsMobile] = useState(false);
+  const [loadedItems, setLoadedItems] = useState(ITEMS_PER_PAGE);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Get unique categories
   const categories = useMemo(() => {
@@ -84,28 +97,59 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     return sorted;
   }, [products, selectedCategories, sortBy]);
 
-  // Paginate products
-  const paginatedProducts = useMemo(() => {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    return filteredAndSortedProducts.slice(startIndex, endIndex);
-  }, [filteredAndSortedProducts, currentPage]);
+  // Display products based on device type
+  const displayedProducts = useMemo(() => {
+    if (isMobile) {
+      // On mobile: show first N products (infinite scroll)
+      return filteredAndSortedProducts.slice(0, loadedItems);
+    } else {
+      // On desktop: use pagination
+      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      const endIndex = startIndex + ITEMS_PER_PAGE;
+      return filteredAndSortedProducts.slice(startIndex, endIndex);
+    }
+  }, [filteredAndSortedProducts, currentPage, loadedItems, isMobile]);
 
   const totalPages = Math.ceil(filteredAndSortedProducts.length / ITEMS_PER_PAGE);
+  const hasMoreItems = loadedItems < filteredAndSortedProducts.length;
 
-  // Reset to page 1 when filters change
+  // Load more items for mobile
+  const loadMoreItems = useCallback(() => {
+    setLoadedItems(prev => Math.min(prev + ITEMS_PER_PAGE, filteredAndSortedProducts.length));
+  }, [filteredAndSortedProducts.length]);
+
+  // Reset states when filters change
   const handleCategoryChange = (categories: string[]) => {
     setSelectedCategories(categories);
     setCurrentPage(1);
+    setLoadedItems(ITEMS_PER_PAGE); // Reset loaded items for mobile
   };
 
   const handleSortChange = (value: string) => {
     setSortBy(value);
     setCurrentPage(1);
+    setLoadedItems(ITEMS_PER_PAGE); // Reset loaded items for mobile
   };
 
-  const startItem = (currentPage - 1) * ITEMS_PER_PAGE + 1;
-  const endItem = Math.min(currentPage * ITEMS_PER_PAGE, filteredAndSortedProducts.length);
+  // Calculate display info
+  const startItem = isMobile ? 1 : (currentPage - 1) * ITEMS_PER_PAGE + 1;
+  const endItem = isMobile
+    ? Math.min(loadedItems, filteredAndSortedProducts.length)
+    : Math.min(currentPage * ITEMS_PER_PAGE, filteredAndSortedProducts.length);
+
+  // Optional: Auto-load more items when user scrolls near bottom (infinite scroll)
+  useEffect(() => {
+    if (!isMobile || !hasMoreItems) return;
+
+    const handleScroll = () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+        loadMoreItems();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMobile, hasMoreItems, loadMoreItems]);
 
   return (
     <div className="w-full">
@@ -141,20 +185,34 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           </div>
 
           {/* Product Grid */}
-          {paginatedProducts.length > 0 ? (
+          {displayedProducts.length > 0 ? (
             <>
               <ProductGrid
-                products={paginatedProducts}
+                products={displayedProducts}
                 className="mb-8"
               />
 
-              {totalPages > 1 && (
+              {/* Desktop Pagination */}
+              {!isMobile && totalPages > 1 && (
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
                   onPageChange={setCurrentPage}
                   className="mt-8"
                 />
+              )}
+
+              {/* Mobile Load More Button */}
+              {isMobile && hasMoreItems && (
+                <div className="flex justify-center mt-8">
+                  <Button
+                    variant="outline"
+                    onClick={loadMoreItems}
+                    className="px-8 py-3"
+                  >
+                    Load More Products
+                  </Button>
+                </div>
               )}
             </>
           ) : (
@@ -167,6 +225,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                   setSelectedCategories([]);
                   setSortBy('title-asc');
                   setCurrentPage(1);
+                  setLoadedItems(ITEMS_PER_PAGE);
                 }}
                 className="text-blue-600 hover:text-blue-700 font-medium"
               >

@@ -20,7 +20,7 @@ const HeaderActions = () => {
                         <Link
                             to="/search"
                             aria-label="Search"
-                            className="p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                            className="p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
                         >
                             <Search className="h-5 w-5" aria-hidden="true" />
                         </Link>
@@ -29,7 +29,7 @@ const HeaderActions = () => {
                         <Link
                             to="/account"
                             aria-label="Account"
-                            className="p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                            className="p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
                         >
                             <User className="h-5 w-5" aria-hidden="true" />
                         </Link>
@@ -38,7 +38,7 @@ const HeaderActions = () => {
                         <Link
                             to="/cart"
                             aria-label={`Shopping cart with ${totalItems} items`}
-                            className="relative p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                            className="relative p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
                         >
                             <ShoppingCart className="h-5 w-5" aria-hidden="true" />
                             {totalItems > 0 && (
@@ -57,7 +57,7 @@ const HeaderActions = () => {
                         aria-label="Open navigation menu"
                         aria-expanded={isMobileMenuOpen}
                         aria-controls="mobile-menu"
-                        className="p-2 text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                        className="p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
                     >
                         <Menu className="h-6 w-6" aria-hidden="true" />
                     </button>
