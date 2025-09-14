@@ -10,7 +10,7 @@ const routes = [
 
 const Navigation = () => {
     return (
-        <nav className="hidden lg:flex" aria-label="primary">
+        <nav className="hidden lg:flex" aria-label="Primary navigation">
             <ul className="flex gap-10">
                 {routes.map((route) => (
                     <li key={route.name}>
