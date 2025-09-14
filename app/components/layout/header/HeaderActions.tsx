@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import MobileMenu from "~/components/ui/MobileMenu";
-import CartLink from "~/components/cart/CartLink";
 import HeaderActionsContent from "./HeaderActionsContent";
 
 const HeaderActions = () => {

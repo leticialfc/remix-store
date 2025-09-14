@@ -1,5 +1,4 @@
-import { Link } from "react-router";
-import { isSelected } from "~/utils/isSelected";
+import { Link, useLocation } from "react-router";
 
 interface NavigationProps {
     className?: string;
@@ -14,11 +13,13 @@ const routes = [
 ];
 
 const Navigation = ({ className = "" }: NavigationProps) => {
+    const location = useLocation();
+
     return (
         <nav className={`flex ${className}`} aria-label="Primary navigation">
             <ul className="flex gap-8">
                 {routes.map((route) => (
-                    <li key={route.name} className={`rounded-md px-4 py-2 ${isSelected(route.path) ? 'bg-gray-100' : ''}`}>
+                    <li key={route.name} className={`${location.pathname === route.path ? 'border-b border-gray-950' : 'hover:border-b border-transparent hover:border-gray-300'} transition-colors`}>
                         <Link key={route.name} to={route.path}>{route.name}</Link>
                     </li>
                 ))}

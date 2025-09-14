@@ -1,9 +1,10 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Search, User } from "lucide-react";
 import CartLink from "~/components/cart/CartLink";
-import { isSelected } from "~/utils/isSelected";
 
 const HeaderActionsContent = () => {
+    const location = useLocation();
+
     return (
         <nav className="flex items-center gap-4" aria-label="User actions">
             <ul className="flex items-center space-x-2">
@@ -11,7 +12,7 @@ const HeaderActionsContent = () => {
                     <Link
                         to="/search"
                         aria-label="Search"
-                        className={`p-2 focus:outline-none rounded-lg transition-colors ${isSelected('/search') ? 'bg-gray-100' : ''}`}
+                        className={`p-1 focus:outline-none transition-colors border-b ${location.pathname === '/search' ? 'border-gray-950' : 'border-transparent hover:border-gray-300'}`}
                     >
                         <Search className="h-5 w-5" aria-hidden="true" />
                     </Link>
@@ -20,7 +21,7 @@ const HeaderActionsContent = () => {
                     <Link
                         to="/account"
                         aria-label="Account"
-                        className={`p-2 focus:outline-none rounded-lg transition-colors ${isSelected('/account') ? 'bg-gray-100' : ''}`}
+                        className={`p-1 focus:outline-none transition-colors border-b ${location.pathname === '/account' ? 'border-gray-950' : 'border-transparent hover:border-gray-300'}`}
                     >
                         <User className="h-5 w-5" aria-hidden="true" />
                     </Link>
@@ -29,7 +30,7 @@ const HeaderActionsContent = () => {
                     <CartLink />
                 </li>
             </ul>
-        </nav>
+        </nav >
     );
 };
 

@@ -103,7 +103,7 @@ const CartSummary = ({
                 <div className="text-center text-sm">
                     <button
                         onClick={handlePayPal}
-                        className="text-gray-600 hover:text-gray-800 font-medium transition-colors focus:outline-none rounded"
+                        className="text-gray-700 cursor-pointer font-medium transition-colors focus:outline-none rounded"
                     >
                         Or pay with PayPal
                     </button>
