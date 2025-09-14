@@ -21,26 +21,21 @@ const CartItem = ({ item }: CartItemProps) => {
     };
 
     return (
-        <div className="flex items-center space-x-4 pb-4 border-b">
+        <div className="flex space-x-4 pb-4 border-b">
             <ProductImage src={item.thumbnail} alt={item.title} size="small" />
-            <div className="flex flex-1 flex-col items-baseline justify-between">
+            <div className="flex flex-col items-baseline justify-between">
                 <div>
                     <h3 className="font-semibold">{item.title}</h3>
                     <p className="text-gray-600">${item.price.toFixed(2)}</p>
                 </div>
 
-                <div className="flex">
+                <div className="flex items-center gap-2">
                     <QuantityPicker
                         quantity={item.quantity}
                         onQuantityChange={handleQuantityChange}
                         itemName={item.title}
-                        min={0} // Allow 0 to remove item
+                        size="small"
                     />
-
-                    <div className="text-right">
-                        <p className="font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
-                    </div>
-
                     <Button
                         variant="icon"
                         size="medium"

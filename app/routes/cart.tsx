@@ -30,7 +30,7 @@ export default function Cart() {
 
     return (
         <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12">
-            <div className="lg:col-span-2 space-x2">
+            <div className="lg:col-span-2 space-y-4">
                 {items.map((item) => (
                     <CartItem key={item.id} item={item} />
                 ))}
