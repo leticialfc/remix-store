@@ -22,7 +22,7 @@ export default function DropdownOption({
                     id={`option-${option.value}`}
                     checked={isSelected}
                     onChange={() => onSelect(option.value)}
-                    className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                    className="h-4 w-4 border-gray-300 rounded"
                 />
                 <label
                     htmlFor={`option-${option.value}`}

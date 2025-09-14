@@ -15,16 +15,16 @@ export default function MobileDropdownOption({
 }: MobileDropdownOptionProps) {
     if (mode === 'multi') {
         return (
-            <div className={`flex items-center px-4 py-3 rounded-lg ${isSelected
-                ? 'bg-blue-50 font-medium'
-                : 'hover:bg-gray-50'
+            <div className={`flex items-center text-sm px-4 py-3 rounded-lg ${isSelected
+                ? 'bg-stone-100 font-medium'
+                : 'hover:bg-stone-50'
                 }`}>
                 <input
                     type="checkbox"
                     id={`mobile-option-${option.value}`}
                     checked={isSelected}
                     onChange={() => onSelect(option.value)}
-                    className="h-5 w-5 text-blue-600 border-gray-300 rounded"
+                    className="h-5 w-5 border-gray-300 rounded"
                 />
                 <label
                     htmlFor={`mobile-option-${option.value}`}
@@ -40,13 +40,13 @@ export default function MobileDropdownOption({
         <button
             onClick={() => onSelect(option.value)}
             className={`block w-full px-4 py-3 text-left text-base rounded-lg transition-colors text-gray-700 ${isSelected
-                ? 'bg-blue-50 font-medium'
-                : 'hover:bg-gray-50'
+                ? 'bg-stone-100 font-medium'
+                : 'hover:bg-stone-50'
                 }`}
         >
             <div className="flex items-center justify-between">
                 <span>{option.label}</span>
-                {isSelected && <Check className="h-5 w-5 text-blue-600" />}
+                {isSelected && <Check className="h-5 w-5 text-gray-700" />}
             </div>
         </button>
     );
