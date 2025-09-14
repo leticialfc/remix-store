@@ -10,7 +10,7 @@ const ProductInfo = ({ product }: { product: Product }) => {
                 <ProductPrice price={product.price} />
             </div>
             <div className="mt-6 w-full">
-                <AddToCartButton product={product} className="w-full" />
+                <AddToCartButton product={product} className="w-full" radius="none" />
             </div>
             <Divider spacing="large" />
             <ProductDescription description={product.description} />

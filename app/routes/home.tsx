@@ -6,6 +6,7 @@ import Pagination from "~/components/product/grid/Pagination";
 import FilterSidebar from "~/components/product/grid/FilterSidebar";
 import SortDropdown from "~/components/product/grid/SortDropdown";
 import Button from "~/components/ui/Button";
+import { ChevronUp } from "lucide-react";
 import type { Product } from "~/services/api.server";
 
 export function meta({ }: Route.MetaArgs) {
@@ -48,6 +49,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const [sortBy, setSortBy] = useState('title-asc');
   const [isMobile, setIsMobile] = useState(false);
   const [loadedItems, setLoadedItems] = useState(ITEMS_PER_PAGE);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -142,7 +144,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     if (!isMobile || !hasMoreItems) return;
 
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000) {
+      const scrollY = window.scrollY;
+
+      // Show back to top button after scrolling 300px
+      setShowBackToTop(scrollY > 300);
+
+      // Auto-load more items when near bottom
+      if (scrollY + window.innerHeight >= document.body.offsetHeight - 1000) {
         loadMoreItems();
       }
     };
@@ -150,6 +158,14 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isMobile, hasMoreItems, loadMoreItems]);
+
+  // Back to top functionality
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   return (
     <div className="w-full">
@@ -245,6 +261,17 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           />
         </div>
       </div>
+
+      {/* Back to Top Button - Mobile Only */}
+      {isMobile && showBackToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-40 p-3 bg-gray-900 hover:bg-black text-white rounded-full shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          aria-label="Go back to top"
+        >
+          <ChevronUp className="h-6 w-6" aria-hidden="true" />
+        </button>
+      )}
     </div>
   );
 }

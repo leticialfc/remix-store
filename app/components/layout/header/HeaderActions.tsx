@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import { Search, User, ShoppingCart, Menu } from "lucide-react";
 import { useCart } from "~/contexts/CartContext";
 import MobileMenu from "~/components/ui/MobileMenu";
+import Cart from "~/routes/cart";
+import CartLink from "~/components/ui/CartLink";
 
 const HeaderActions = () => {
     const { totalItems } = useCart();
@@ -15,8 +17,8 @@ const HeaderActions = () => {
         <>
             <nav className="flex items-center gap-4" aria-label="User actions">
                 {/* Desktop Actions */}
-                <ul className="hidden lg:flex space-x-4">
-                    <li>
+                <ul className="hidden lg:flex space-x-2">
+                    <li className="flex">
                         <Link
                             to="/search"
                             aria-label="Search"
@@ -25,7 +27,7 @@ const HeaderActions = () => {
                             <Search className="h-5 w-5" aria-hidden="true" />
                         </Link>
                     </li>
-                    <li>
+                    <li className="flex">
                         <Link
                             to="/account"
                             aria-label="Account"
@@ -34,19 +36,8 @@ const HeaderActions = () => {
                             <User className="h-5 w-5" aria-hidden="true" />
                         </Link>
                     </li>
-                    <li>
-                        <Link
-                            to="/cart"
-                            aria-label={`Shopping cart with ${totalItems} items`}
-                            className="relative p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
-                        >
-                            <ShoppingCart className="h-5 w-5" aria-hidden="true" />
-                            {totalItems > 0 && (
-                                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
-                                    {totalItems > 99 ? '99+' : totalItems}
-                                </span>
-                            )}
-                        </Link>
+                    <li className="flex">
+                        <CartLink />
                     </li>
                 </ul>
 

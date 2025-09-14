@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { Link } from "react-router";
+import HeaderLogo from "../layout/header/HeaderLogo";
+import CartLink from "./CartLink";
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -105,18 +107,11 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
     if (!isVisible) return null;
 
     const navigationItems = [
-        { name: "Home", path: "/", description: "Browse our products" },
-        { name: "Shop", path: "/shop", description: "All categories" },
-        { name: "Search", path: "/search", description: "Find products" },
-        { name: "Account", path: "/account", description: "Your profile" },
-        { name: "Cart", path: "/cart", description: "View your items" },
-    ];
-
-    const supportItems = [
-        { name: "About", path: "/about", description: "Learn about us" },
-        { name: "Contact", path: "/contact", description: "Get in touch" },
-        { name: "Blog", path: "/blog", description: "Latest updates" },
-        { name: "Help", path: "/help", description: "Customer support" },
+        { name: "Home", path: "/" },
+        { name: "Shop", path: "/shop" },
+        { name: "About", path: "/about" },
+        { name: "Contact", path: "/contact" },
+        { name: "Blog", path: "/blog" }
     ];
 
     return (
@@ -129,19 +124,12 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
                 }`}
         >
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                <h2
-                    id="mobile-menu-title"
-                    className={`text-2xl font-bold text-gray-900 transform transition-all duration-300 ease-out ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-                        }`}
-                    style={{ transitionDelay: '100ms' }}
-                >
-                    Menu
-                </h2>
+            <div className="flex justify-between border-b border-gray-500 px-4 py-2">
+                <HeaderLogo text={"The Online Store".toLocaleUpperCase()} />
                 <button
                     ref={closeButtonRef}
                     onClick={onClose}
-                    className={`p-3 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 transform ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+                    className={`p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 transform ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
                         }`}
                     style={{ transitionDelay: '150ms' }}
                     aria-label="Close menu"
@@ -151,23 +139,17 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
             </div>
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto p-6">
+            <div className="flex-1 overflow-y-auto p-4">
                 <nav className="space-y-8" aria-label="Mobile navigation">
                     {/* Main Navigation */}
                     <section>
-                        <h3 className={`text-lg font-semibold text-gray-900 mb-6 transform transition-all duration-300 ease-out ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-                            }`}
-                            style={{ transitionDelay: '200ms' }}
-                        >
-                            Navigation
-                        </h3>
                         <ul className="space-y-1">
                             {navigationItems.map((item, index) => (
                                 <li
                                     key={item.name}
                                     className={`transform transition-all duration-300 ease-out ${isOpen
-                                            ? 'translate-y-0 opacity-100'
-                                            : 'translate-y-6 opacity-0'
+                                        ? 'translate-y-0 opacity-100'
+                                        : 'translate-y-6 opacity-0'
                                         }`}
                                     style={{ transitionDelay: `${250 + index * 50}ms` }}
                                 >
@@ -179,58 +161,12 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
                                         <div className="font-semibold text-xl text-gray-900 group-hover:text-blue-600 transition-colors">
                                             {item.name}
                                         </div>
-                                        <div className="text-sm text-gray-500 mt-1">{item.description}</div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </section>
-
-                    {/* Support Links */}
-                    <section>
-                        <h3 className={`text-lg font-semibold text-gray-900 mb-6 transform transition-all duration-300 ease-out ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-                            }`}
-                            style={{ transitionDelay: `${450 + navigationItems.length * 50}ms` }}
-                        >
-                            Support
-                        </h3>
-                        <ul className="space-y-1">
-                            {supportItems.map((item, index) => (
-                                <li
-                                    key={item.name}
-                                    className={`transform transition-all duration-300 ease-out ${isOpen
-                                            ? 'translate-y-0 opacity-100'
-                                            : 'translate-y-6 opacity-0'
-                                        }`}
-                                    style={{ transitionDelay: `${500 + navigationItems.length * 50 + index * 50}ms` }}
-                                >
-                                    <Link
-                                        to={item.path}
-                                        onClick={onClose}
-                                        className="block p-4 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors group"
-                                    >
-                                        <div className="font-semibold text-xl text-gray-900 group-hover:text-blue-600 transition-colors">
-                                            {item.name}
-                                        </div>
-                                        <div className="text-sm text-gray-500 mt-1">{item.description}</div>
                                     </Link>
                                 </li>
                             ))}
                         </ul>
                     </section>
                 </nav>
-
-                {/* Footer */}
-                <div className="mt-12 pt-8 border-t border-gray-200">
-                    <div className={`text-center text-sm text-gray-500 transform transition-all duration-300 ease-out ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-                        }`}
-                        style={{ transitionDelay: `${700 + (navigationItems.length + supportItems.length) * 50}ms` }}
-                    >
-                        © {new Date().getFullYear()} The Online Store
-                        <br />
-                        <span className="text-xs">Made with ❤️ for great shopping</span>
-                    </div>
-                </div>
             </div>
         </div>
     );
