@@ -8,6 +8,7 @@ import Dropdown from "~/components/ui/Dropdown";
 import Button from "~/components/ui/Button";
 import { ChevronUp } from "lucide-react";
 import type { Product } from "~/services/api.server";
+import { capitalize } from "~/utils/capitalize";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -190,7 +191,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
                 <Dropdown
                   mode="multi"
                   title="Categories"
-                  options={categories.map(cat => ({ value: cat, label: cat.charAt(0).toUpperCase() + cat.slice(1) }))}
+                  options={categories.map(cat => ({ value: cat, label: capitalize(cat) }))}
                   selectedValues={selectedCategories}
                   onChange={handleCategoryChange}
                 />

@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { X } from "lucide-react";
 import { Link } from "react-router";
-import HeaderLogo from "../layout/header/HeaderLogo";
-import Button from "./Button";
-import Header from "../layout/header/Header";
+import MobileMenuHeader from "./MobileMenuHeader";
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -14,7 +11,6 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
     const [isVisible, setIsVisible] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-    const closeButtonRef = useRef<HTMLButtonElement>(null);
     const lastFocusedElement = useRef<HTMLElement | null>(null);
 
     // Handle menu open/close animations
@@ -28,9 +24,8 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
             // Prevent body scroll
             document.body.style.overflow = 'hidden';
 
-            // Focus the close button after animation
+            // Animation timing
             setTimeout(() => {
-                closeButtonRef.current?.focus();
                 setIsAnimating(false);
             }, 300);
         } else {
@@ -124,7 +119,9 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
             className={`fixed inset-0 bg-white z-50 lg:hidden transition-all duration-300 ease-in-out ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
                 }`}
         >
-            <Header />
+            {/* Mobile Menu Header */}
+            <MobileMenuHeader isOpen={isOpen} onClose={onClose} />
+
             {/* Content */}
             <div className="flex-1 overflow-y-auto p-4">
                 <nav className="space-y-8" aria-label="Mobile navigation">

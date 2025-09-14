@@ -78,10 +78,9 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <>
+    <CartProvider>
       <Header />
-      <main className="pt-16 p-4 container mx-auto">
-        <h1>{message}</h1>
+      <main className="flex-1 px-4 py-6 lg:px-14">
         <p>{details}</p>
         {stack && (
           <pre className="w-full p-4 overflow-x-auto">
@@ -89,6 +88,6 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
           </pre>
         )}
       </main>
-    </>
+    </CartProvider>
   );
 }
