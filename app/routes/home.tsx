@@ -37,13 +37,13 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
+    const checkDesktopLayout = () => {
       setIsMobile(window.innerWidth < 1024); // lg breakpoint
     };
 
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    checkDesktopLayout();
+    window.addEventListener('resize', checkDesktopLayout);
+    return () => window.removeEventListener('resize', checkDesktopLayout);
   }, []);
 
   // Get unique categories
