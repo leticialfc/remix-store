@@ -9,6 +9,9 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import Header from "./components/layout/header/Header";
+import Footer from "./components/layout/footer/Footer";
+import { CartProvider } from "./contexts/CartContext";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,7 +45,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <CartProvider>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1 px-4 py-6 lg:px-14">
+          <div className="max-w-screen-2xl mx-auto">
+            <div className="w-full flex items-center justify-between">
+              <Outlet />
+            </div>
+          </div>
+        </main>
+      </div>
+    </CartProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
@@ -62,14 +78,16 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <CartProvider>
+      <Header />
+      <main className="flex-1 px-4 py-6 lg:px-14">
+        <p>{details}</p>
+        {stack && (
+          <pre className="w-full p-4 overflow-x-auto">
+            <code>{stack}</code>
+          </pre>
+        )}
+      </main>
+    </CartProvider>
   );
 }
