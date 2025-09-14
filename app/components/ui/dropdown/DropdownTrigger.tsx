@@ -20,7 +20,7 @@ export default function DropdownTrigger({
             type="button"
             onClick={onClick}
             onKeyDown={onKeyDown}
-            className="inline-flex justify-between items-center w-full px-4 py-2 text-sm text-gray-950 bg-white border border-gray-500 rounded-md hover:bg-gray-50 focus:outline-none"
+            className="inline-flex justify-between items-center w-full px-4 py-2 text-sm border border-gray-500 rounded-md hover:bg-stone-50"
             aria-expanded={isOpen}
             aria-haspopup="listbox"
             aria-label={`${title} options`}

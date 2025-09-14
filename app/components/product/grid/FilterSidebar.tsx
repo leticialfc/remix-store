@@ -35,7 +35,7 @@ const FilterSidebar = ({
         >
             <div className="space-y-6">
                 <div>
-                    <h2 className="text-sm text-gray-950 mb-4">
+                    <h2 className="text-sm mb-4">
                         Categories
                     </h2>
                     <div className="space-y-2">
@@ -50,7 +50,7 @@ const FilterSidebar = ({
                                         type="checkbox"
                                         checked={isSelected}
                                         onChange={() => handleCategoryToggle(category)}
-                                        className="h-4 w-4 text-blue-600  border-gray-300 rounded"
+                                        className="h-4 w-4 border-gray-300 rounded"
                                         aria-describedby={`${checkboxId}-description`}
                                     />
                                     <label

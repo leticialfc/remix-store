@@ -12,7 +12,7 @@ const HeaderActionsContent = () => {
                     <Link
                         to="/search"
                         aria-label="Search"
-                        className={`p-1 focus:outline-none transition-colors border-b ${location.pathname === '/search' ? 'border-gray-950' : 'border-transparent hover:border-gray-300'}`}
+                        className={`p-1 focus:outline-none transition-colors border-b ${location.pathname !== '/search' ? 'border-transparent hover:border-gray-300' : ''}`}
                     >
                         <Search className="h-5 w-5" aria-hidden="true" />
                     </Link>
@@ -21,7 +21,7 @@ const HeaderActionsContent = () => {
                     <Link
                         to="/account"
                         aria-label="Account"
-                        className={`p-1 focus:outline-none transition-colors border-b ${location.pathname === '/account' ? 'border-gray-950' : 'border-transparent hover:border-gray-300'}`}
+                        className={`p-1 focus:outline-none transition-colors border-b ${location.pathname !== '/account' ? 'border-transparent hover:border-gray-300' : ''}`}
                     >
                         <User className="h-5 w-5" aria-hidden="true" />
                     </Link>

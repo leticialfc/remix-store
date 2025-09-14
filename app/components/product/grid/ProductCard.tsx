@@ -31,7 +31,7 @@ const ProductCard = ({ product, className = "" }: ProductCardProps) => {
 
                 {/* Product Info */}
                 <div className="space-y-0.5">
-                    <h3 className="text-sm font-medium text-gray-950 group-hover:text-gray-700 transition-colors">
+                    <h3 className="text-sm font-medium group-hover:text-gray-700 transition-colors">
                         {product.title}
                     </h3>
                     <p className="text-sm text-gray-700">
