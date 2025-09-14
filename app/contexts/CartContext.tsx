@@ -62,6 +62,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             }
             return [...prev, { ...product, quantity: 1 }];
         });
+        alert(`Added ${product.title} to cart`);
     };
 
     const removeFromCart = (productId: number) => {
