@@ -26,7 +26,7 @@ const CartItem = ({ item }: CartItemProps) => {
             <div className="flex flex-col items-baseline justify-between w-full lg:w-fit">
                 <div>
                     <h3 className="font-semibold">{item.title}</h3>
-                    <p className="text-gray-600">${item.price.toFixed(2)}</p>
+                    <p className="text-gray-700">${item.price.toFixed(2)}</p>
                 </div>
                 <div className="flex items-center w-full justify-between lg:justify-normal lg:space-x-2">
                     <QuantityPicker

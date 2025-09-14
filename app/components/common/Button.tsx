@@ -43,11 +43,11 @@ export default function Button({
     const getVariantClasses = () => {
         switch (variant) {
             case 'outline':
-                return 'bg-white hover:bg-gray-50 text-gray-900 border border-gray-300';
+                return 'bg-white hover:bg-stone-50 text-gray-900 border border-gray-300';
             case 'no-outline':
-                return "hover:bg-gray-50";
+                return "hover:bg-stone-50";
             case 'icon':
-                return 'bg-transparent hover:bg-gray-100 text-gray-600 hover:text-gray-900';
+                return 'bg-transparent hover:bg-stone-100';
             case 'custom':
                 return ''; // Let className handle all styling
             case 'primary':

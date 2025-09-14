@@ -111,9 +111,9 @@ const QuantityPicker = ({
         <div
             className={`
                 inline-flex items-center 
-                bg-white border border-gray-500 
+                bg-white border 
                 rounded-md overflow-hidden
-                text-sm hover:bg-gray-50 focus:outline-none 
+                text-sm hover:bg-stone-50 focus:outline-none 
                 transition-all duration-200
                 ${sizeClasses.container}
                 ${className}
@@ -128,10 +128,7 @@ const QuantityPicker = ({
                 disabled={isAtMin}
                 className={`
                     flex items-center justify-center
-                    text-gray-700 hover:text-gray-900 hover:bg-gray-50
                     disabled:text-gray-300 disabled:cursor-not-allowed disabled:hover:bg-transparent
-                    transition-colors duration-150
-                    focus:outline-none focus:bg-gray-100
                     ${sizeClasses.button}
                 `}
                 aria-label={`Decrease quantity of ${itemName}`}
@@ -152,9 +149,8 @@ const QuantityPicker = ({
                 min={min}
                 max={max}
                 className={`
-                    text-center font-semibold text-gray-900
+                    text-center font-semibold
                     bg-transparent border-0 
-                    focus:outline-none
                     max-w-10
                     ${sizeClasses.input}
                 `}
@@ -177,10 +173,7 @@ const QuantityPicker = ({
                 disabled={isAtMax}
                 className={`
                     flex items-center justify-center
-                    text-gray-700 hover:text-gray-900 hover:bg-gray-50
                     disabled:text-gray-300 disabled:cursor-not-allowed disabled:hover:bg-transparent
-                    transition-colors duration-150
-                    focus:outline-none focus:bg-gray-100
                     ${sizeClasses.button}
                 `}
                 aria-label={`Increase quantity of ${itemName}`}
