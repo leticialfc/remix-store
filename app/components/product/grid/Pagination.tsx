@@ -83,7 +83,7 @@ const Pagination = ({
                     return (
                         <Button
                             key={pageNumber}
-                            variant={isActive ? "outline" : "no-outline"}
+                            variant={isActive ? "primary" : "no-outline"}
                             size="small"
                             onClick={() => onPageChange(pageNumber)}
                             className="min-w-[40px] justify-center"

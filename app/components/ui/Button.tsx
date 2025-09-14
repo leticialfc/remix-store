@@ -45,7 +45,7 @@ export default function Button({
             case 'outline':
                 return 'bg-white hover:bg-gray-50 text-gray-900 border border-gray-300';
             case 'no-outline':
-                return "";
+                return "hover:bg-gray-50";
             case 'icon':
                 return 'bg-transparent hover:bg-gray-100 text-gray-600 hover:text-gray-900';
             case 'custom':
