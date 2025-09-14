@@ -3,15 +3,14 @@ import type { ReactNode, ButtonHTMLAttributes } from 'react';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
     /** 
-     * Color variant for the button. Defaults to 'dark'.
-     * - 'dark': Gray-900 background with black hover
-     * - 'blue': Blue-600 background with blue-700 hover
-     * - 'green': Green-600 background with green-700 hover
-     * - 'red': Red-600 background with red-700 hover
-     * - 'white': White background with gray border
+     * Variant for the button. Defaults to 'primary'.
+     * - 'primary': Gray-900 background with black hover
+     * - 'outline': No background with gray border
+     * - 'no-outline': No background and no border
+     * - 'icon': Icon-only button with subtle background and hover states
      * - 'custom': Use className prop for full customization
      */
-    variant?: 'dark' | 'blue' | 'green' | 'red' | 'white' | 'custom';
+    variant?: 'primary' | 'outline' | 'no-outline' | 'icon' | 'custom';
     /**
      * Button size. Defaults to 'medium'.
      */
@@ -34,7 +33,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function Button({
     children,
-    variant = 'dark',
+    variant = 'primary',
     size = 'medium',
     fullWidth = false,
     radius = 'medium',
@@ -43,23 +42,35 @@ export default function Button({
 }: ButtonProps) {
     const getVariantClasses = () => {
         switch (variant) {
-            case 'blue':
-                return 'bg-blue-600 hover:bg-blue-700 text-white';
-            case 'green':
-                return 'bg-green-600 hover:bg-green-700 text-white';
-            case 'red':
-                return 'bg-red-600 hover:bg-red-700 text-white';
-            case 'white':
+            case 'outline':
                 return 'bg-white hover:bg-gray-50 text-gray-900 border border-gray-300';
+            case 'no-outline':
+                return "";
+            case 'icon':
+                return 'bg-transparent hover:bg-gray-100 text-gray-600 hover:text-gray-900';
             case 'custom':
                 return ''; // Let className handle all styling
-            case 'dark':
+            case 'primary':
             default:
                 return 'bg-gray-900 hover:bg-black text-white';
         }
     };
 
     const getSizeClasses = () => {
+        // Icon buttons get square dimensions and centered content
+        if (variant === 'icon') {
+            switch (size) {
+                case 'small':
+                    return 'p-1.5 w-8 h-8';
+                case 'large':
+                    return 'p-3 w-12 h-12';
+                case 'medium':
+                default:
+                    return 'p-2 w-10 h-10';
+            }
+        }
+
+        // Regular button sizing
         switch (size) {
             case 'small':
                 return 'py-2 px-4 text-sm';
@@ -89,7 +100,11 @@ export default function Button({
         }
     };
 
-    const baseClasses = 'font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseClasses = 'font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2';
+
+    // Icon buttons get additional centering classes
+    const iconClasses = variant === 'icon' ? 'flex items-center justify-center' : '';
+
     const variantClasses = variant === 'custom' ? '' : getVariantClasses();
     const sizeClasses = getSizeClasses();
     const radiusClasses = getRadiusClasses();
@@ -97,7 +112,7 @@ export default function Button({
 
     return (
         <button
-            className={`${baseClasses} ${variantClasses} ${sizeClasses} ${radiusClasses} ${widthClasses} ${className}`}
+            className={`${baseClasses} ${iconClasses} ${variantClasses} ${sizeClasses} ${radiusClasses} ${widthClasses} ${className}`}
             {...props}
         >
             {children}

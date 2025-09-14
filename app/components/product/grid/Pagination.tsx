@@ -19,30 +19,23 @@ const Pagination = ({
         const maxVisible = 5;
 
         if (totalPages <= maxVisible) {
+            // Show all pages if total is 5 or less
             for (let i = 1; i <= totalPages; i++) {
                 pages.push(i);
             }
         } else {
-            if (currentPage <= 3) {
-                for (let i = 1; i <= 4; i++) {
-                    pages.push(i);
-                }
-                pages.push('...');
-                pages.push(totalPages);
-            } else if (currentPage >= totalPages - 2) {
-                pages.push(1);
-                pages.push('...');
-                for (let i = totalPages - 3; i <= totalPages; i++) {
-                    pages.push(i);
-                }
-            } else {
-                pages.push(1);
-                pages.push('...');
-                for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-                    pages.push(i);
-                }
-                pages.push('...');
-                pages.push(totalPages);
+            // Calculate start and end of the 5-page window
+            let start = Math.max(1, currentPage - 2);
+            let end = Math.min(totalPages, start + maxVisible - 1);
+
+            // Adjust start if we're near the end
+            if (end - start < maxVisible - 1) {
+                start = Math.max(1, end - maxVisible + 1);
+            }
+
+            // Add pages to the array
+            for (let i = start; i <= end; i++) {
+                pages.push(i);
             }
         }
 
@@ -65,44 +58,33 @@ const Pagination = ({
 
     return (
         <nav
-            className={`flex items-center justify-center space-x-1 ${className}`}
+            className={`flex items-center justify-end space-x-1 ${className}`}
             aria-label="Pagination navigation"
         >
             {/* Previous Button */}
-            <Button
-                variant="white"
-                size="medium"
-                onClick={handlePrevious}
-                disabled={currentPage === 1}
-                className="p-2"
-                aria-label="Go to previous page"
-            >
-                <ChevronLeft className="h-4 w-4" />
-            </Button>
+            {currentPage > 1 &&
+                <Button
+                    variant="icon"
+                    size="small"
+                    onClick={handlePrevious}
+                    disabled={currentPage === 1}
+                    className="p-2"
+                    aria-label="Go to previous page"
+                >
+                    <ChevronLeft className="h-4 w-4" />
+                </Button>}
 
             {/* Page Numbers */}
             <div className="flex items-center space-x-1">
                 {getVisiblePages().map((page, index) => {
-                    if (page === '...') {
-                        return (
-                            <span
-                                key={`ellipsis-${index}`}
-                                className="px-3 py-2 text-gray-500"
-                                aria-hidden="true"
-                            >
-                                ...
-                            </span>
-                        );
-                    }
-
                     const pageNumber = page as number;
                     const isActive = pageNumber === currentPage;
 
                     return (
                         <Button
                             key={pageNumber}
-                            variant={isActive ? "dark" : "white"}
-                            size="medium"
+                            variant={isActive ? "outline" : "no-outline"}
+                            size="small"
                             onClick={() => onPageChange(pageNumber)}
                             className="min-w-[40px] justify-center"
                             aria-label={`Go to page ${pageNumber}`}
@@ -116,8 +98,8 @@ const Pagination = ({
 
             {/* Next Button */}
             <Button
-                variant="white"
-                size="medium"
+                variant="icon"
+                size="small"
                 onClick={handleNext}
                 disabled={currentPage === totalPages}
                 className="p-2"
