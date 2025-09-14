@@ -44,18 +44,18 @@ const FilterSidebar = ({
                             const checkboxId = `category-${category.replace(/\s+/g, '-').toLowerCase()}`;
 
                             return (
-                                <div key={category} className="flex items-center">
+                                <div key={category} className={`flex items-center rounded-md`}>
                                     <input
                                         id={checkboxId}
                                         type="checkbox"
                                         checked={isSelected}
                                         onChange={() => handleCategoryToggle(category)}
-                                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                        className="h-4 w-4 text-blue-600  border-gray-300 rounded"
                                         aria-describedby={`${checkboxId}-description`}
                                     />
                                     <label
                                         htmlFor={checkboxId}
-                                        className="ml-3 text-sm text-gray-600 cursor-pointer"
+                                        className="ml-3 text-sm text-gray-700 cursor-pointer"
                                     >
                                         {capitalize(category)}
                                     </label>

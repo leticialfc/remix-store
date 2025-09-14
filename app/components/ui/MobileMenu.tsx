@@ -140,7 +140,7 @@ const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
                                     <Link
                                         to={item.path}
                                         onClick={onClose}
-                                        className="block p-4 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors group"
+                                        className="block p-4 rounded-xl hover:bg-gray-50 focus:outline-none transition-colors group"
                                     >
                                         <div className="font-semibold text-xl text-gray-900 group-hover:text-blue-600 transition-colors">
                                             {item.name}

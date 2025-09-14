@@ -25,7 +25,7 @@ const HeaderActions = () => {
                     aria-label="Open navigation menu"
                     aria-expanded={isMobileMenuOpen}
                     aria-controls="mobile-menu"
-                    className="p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                    className="p-2 focus:outline-none rounded-lg transition-colors"
                 >
                     <Menu className="h-6 w-6" aria-hidden="true" />
                 </button>

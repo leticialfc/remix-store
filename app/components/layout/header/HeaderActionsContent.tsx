@@ -14,7 +14,7 @@ const HeaderActionsContent = ({ showMobileMenu = false }: HeaderActionsContentPr
                     <Link
                         to="/search"
                         aria-label="Search"
-                        className="p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                        className="p-2 focus:outline-none rounded-lg transition-colors"
                     >
                         <Search className="h-5 w-5" aria-hidden="true" />
                     </Link>
@@ -23,7 +23,7 @@ const HeaderActionsContent = ({ showMobileMenu = false }: HeaderActionsContentPr
                     <Link
                         to="/account"
                         aria-label="Account"
-                        className="p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+                        className="p-2 focus:outline-none rounded-lg transition-colors"
                     >
                         <User className="h-5 w-5" aria-hidden="true" />
                     </Link>

@@ -103,7 +103,7 @@ const CartSummary = ({
                 <div className="text-center text-sm">
                     <button
                         onClick={handlePayPal}
-                        className="text-gray-600 hover:text-gray-800 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+                        className="text-gray-600 hover:text-gray-800 font-medium transition-colors focus:outline-none rounded"
                     >
                         Or pay with PayPal
                     </button>
@@ -126,7 +126,7 @@ const CartSummary = ({
                             onKeyDown={handlePromoKeyDown}
                             placeholder="Enter code"
                             disabled={isPromoApplied}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-100 disabled:text-gray-500"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none disabled:bg-gray-100 disabled:text-gray-500"
                         />
                         <Button
                             onClick={handleApplyPromo}

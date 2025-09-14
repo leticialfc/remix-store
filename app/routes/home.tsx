@@ -198,7 +198,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
               </div>
             </div>
 
-            <div className="text-sm text-gray-600 whitespace-nowrap">
+            <div className="text-sm text-gray-500 whitespace-nowrap">
               Showing {startItem}-{endItem} of {filteredAndSortedProducts.length}
             </div>
           </div>
@@ -269,7 +269,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
       {isMobile && showBackToTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-40 p-3 bg-gray-900 hover:bg-black text-white rounded-full shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="fixed bottom-6 right-6 z-40 p-3 bg-gray-900 hover:bg-black text-white rounded-full shadow-lg transition-all duration-300 focus:outline-none "
           aria-label="Go back to top"
         >
           <ChevronUp className="h-6 w-6" aria-hidden="true" />

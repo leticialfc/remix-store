@@ -118,7 +118,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
                     type="button"
                     onClick={() => setIsOpen(!isOpen)}
                     onKeyDown={handleKeyDown}
-                    className="inline-flex justify-between items-center w-full px-4 py-2 text-sm text-gray-950 bg-white border border-gray-500 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="inline-flex justify-between items-center w-full px-4 py-2 text-sm text-gray-950 bg-white border border-gray-500 rounded-md hover:bg-gray-50 focus:outline-none"
                     aria-expanded={isOpen}
                     aria-haspopup="listbox"
                     aria-label={`${title} options`}
@@ -133,23 +133,26 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
                 {/* Desktop Dropdown */}
                 {!isMobile && isOpen && (
                     <div
-                        className="absolute left-0 z-10 mt-2 w-full bg-white border border-gray-700 rounded-md shadow-lg"
+                        className="absolute left-0 z-10 mt-2 w-full bg-white border border-gray-500 rounded-md shadow-lg"
                         role="listbox"
                         aria-label={`${title} options`}
                     >
-                        <div className="py-1">
+                        <div className="p-2 space-y-1">
                             {options.map((option) => {
                                 const isSelected = isOptionSelected(option.value);
 
                                 return props.mode === 'multi' ? (
                                     // Multi-select with checkbox
-                                    <div key={option.value} className="flex items-center px-4 py-2 hover:bg-gray-50">
+                                    <div key={option.value} className={`flex items-center px-4 py-2 ${isSelected
+                                        ? 'bg-blue-50  hover:bg-blue-50 text-blue-700 font-medium rounded-md'
+                                        : 'hover:bg-gray-50 text-gray-800'
+                                        }`}>
                                         <input
                                             type="checkbox"
                                             id={`option-${option.value}`}
                                             checked={isSelected}
                                             onChange={() => handleSelection(option.value)}
-                                            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                            className="h-4 w-4 text-blue-600  border-gray-300 rounded"
                                         />
                                         <label
                                             htmlFor={`option-${option.value}`}
@@ -163,9 +166,9 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
                                     <button
                                         key={option.value}
                                         onClick={() => handleSelection(option.value)}
-                                        className={`block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 focus:bg-gray-100 focus:outline-none ${isSelected
-                                            ? 'bg-gray-100 text-gray-950 font-medium'
-                                            : 'text-gray-800'
+                                        className={`block w-full px-4 py-2 text-left text-sm hover:bg-gray-50 rounded-md focus:bg-gray-100 text-gray-700 focus:outline-none ${isSelected
+                                            ? 'bg-blue-50 text-blue-700 font-medium'
+                                            : ''
                                             }`}
                                         role="option"
                                         aria-selected={isSelected}
@@ -192,17 +195,20 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 
                             return props.mode === 'multi' ? (
                                 // Multi-select with checkbox for mobile
-                                <div key={option.value} className="flex items-center px-4 py-3 rounded-lg hover:bg-gray-50">
+                                <div key={option.value} className={`flex items-center px-4 py-3 rounded-lg ${isSelected
+                                    ? 'bg-blue-50 font-medium'
+                                    : 'hover:bg-gray-50 '
+                                    }`}>
                                     <input
                                         type="checkbox"
                                         id={`mobile-option-${option.value}`}
                                         checked={isSelected}
                                         onChange={() => handleSelection(option.value)}
-                                        className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                        className="h-5 w-5 text-blue-600  border-gray-300 rounded"
                                     />
                                     <label
                                         htmlFor={`mobile-option-${option.value}`}
-                                        className="ml-3 text-base text-gray-700 cursor-pointer flex-1"
+                                        className="ml-3 text-base text-gray-700 cursor-pointer rounded flex-1"
                                     >
                                         {option.label}
                                     </label>
@@ -212,9 +218,9 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
                                 <button
                                     key={option.value}
                                     onClick={() => handleSelection(option.value)}
-                                    className={`block w-full px-4 py-3 text-left text-base rounded-lg transition-colors ${isSelected
-                                        ? 'bg-blue-50 text-blue-700 font-medium border border-blue-200'
-                                        : 'text-gray-700 hover:bg-gray-50'
+                                    className={`block w-full px-4 py-3 text-left text-base rounded-lg transition-colors text-gray-700 ${isSelected
+                                        ? 'bg-blue-50 font-medium'
+                                        : 'hover:bg-gray-50'
                                         }`}
                                 >
                                     <div className="flex items-center justify-between">
@@ -224,18 +230,6 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
                                 </button>
                             );
                         })}
-
-                        {/* Close button for multi-select mode */}
-                        {props.mode === 'multi' && (
-                            <div className="pt-4 border-t">
-                                <button
-                                    onClick={() => setIsOpen(false)}
-                                    className="w-full px-4 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-                                >
-                                    Done
-                                </button>
-                            </div>
-                        )}
                     </div>
                 </MobileModal>
             )}

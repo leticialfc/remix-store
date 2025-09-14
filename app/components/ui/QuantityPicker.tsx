@@ -113,7 +113,7 @@ const QuantityPicker = ({
                 inline-flex items-center 
                 bg-white border border-gray-500 
                 rounded-md overflow-hidden
-                text-sm text-gray-950 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                text-sm text-gray-950 hover:bg-gray-50 focus:outline-none 
                 transition-all duration-200
                 ${sizeClasses.container}
                 ${className}

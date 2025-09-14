@@ -9,7 +9,7 @@ const CartLink = () => {
         <Link
             to="/cart"
             aria-label={`Shopping cart with ${totalItems} items`}
-            className="relative p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg transition-colors"
+            className="relative p-2 focus:outline-none rounded-lg transition-colors"
         >
             <ShoppingCart className="h-5 w-5" aria-hidden="true" />
             {totalItems > 0 && (
