@@ -1,6 +1,6 @@
 import type { Product } from "~/services/api.server";
 import AddToCartButton from "~/components/product/detail/AddToCartButton";
-import Divider from "../../ui/Divider";
+import Divider from "../../common/Divider";
 
 const ProductInfo = ({ product }: { product: Product }) => {
     return (

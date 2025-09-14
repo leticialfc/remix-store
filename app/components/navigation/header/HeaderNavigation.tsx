@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 interface NavigationProps {
     className?: string;
@@ -12,12 +12,14 @@ const routes = [
     { name: "Blog", path: "/blog" }
 ];
 
-const Navigation = ({ className = "" }: NavigationProps) => {
+const HeaderNavigation = ({ className = "" }: NavigationProps) => {
+    const location = useLocation();
+
     return (
         <nav className={`flex ${className}`} aria-label="Primary navigation">
-            <ul className="flex gap-10">
+            <ul className="flex gap-8">
                 {routes.map((route) => (
-                    <li key={route.name}>
+                    <li key={route.name} className={`${location.pathname === route.path ? 'border-b' : 'hover:border-b border-transparent hover:border-gray-300'} transition-colors`}>
                         <Link key={route.name} to={route.path}>{route.name}</Link>
                     </li>
                 ))}
@@ -26,4 +28,4 @@ const Navigation = ({ className = "" }: NavigationProps) => {
     )
 }
 
-export default Navigation;
+export default HeaderNavigation;

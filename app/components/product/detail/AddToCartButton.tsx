@@ -1,6 +1,6 @@
 import { useCart } from '~/contexts/CartContext';
 import type { Product } from '~/services/api.server';
-import Button from '~/components/ui/Button';
+import Button from '~/components/common/Button';
 import type { ComponentProps } from 'react';
 
 interface AddToCartButtonProps extends Omit<ComponentProps<typeof Button>, 'onClick' | 'children'> {
