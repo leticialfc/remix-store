@@ -1,12 +1,9 @@
 import { Link } from "react-router";
 import { Search, User } from "lucide-react";
 import CartLink from "~/components/cart/CartLink";
+import { isSelected } from "~/utils/isSelected";
 
-interface HeaderActionsContentProps {
-    showMobileMenu?: boolean;
-}
-
-const HeaderActionsContent = ({ showMobileMenu = false }: HeaderActionsContentProps) => {
+const HeaderActionsContent = () => {
     return (
         <nav className="flex items-center gap-4" aria-label="User actions">
             <ul className="flex items-center space-x-2">
@@ -14,7 +11,7 @@ const HeaderActionsContent = ({ showMobileMenu = false }: HeaderActionsContentPr
                     <Link
                         to="/search"
                         aria-label="Search"
-                        className="p-2 focus:outline-none rounded-lg transition-colors"
+                        className={`p-2 focus:outline-none rounded-lg transition-colors ${isSelected('/search') ? 'bg-gray-100' : ''}`}
                     >
                         <Search className="h-5 w-5" aria-hidden="true" />
                     </Link>
@@ -23,7 +20,7 @@ const HeaderActionsContent = ({ showMobileMenu = false }: HeaderActionsContentPr
                     <Link
                         to="/account"
                         aria-label="Account"
-                        className="p-2 focus:outline-none rounded-lg transition-colors"
+                        className={`p-2 focus:outline-none rounded-lg transition-colors ${isSelected('/account') ? 'bg-gray-100' : ''}`}
                     >
                         <User className="h-5 w-5" aria-hidden="true" />
                     </Link>

@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { isSelected } from "~/utils/isSelected";
 
 interface NavigationProps {
     className?: string;
@@ -15,9 +16,9 @@ const routes = [
 const Navigation = ({ className = "" }: NavigationProps) => {
     return (
         <nav className={`flex ${className}`} aria-label="Primary navigation">
-            <ul className="flex gap-10">
+            <ul className="flex gap-8">
                 {routes.map((route) => (
-                    <li key={route.name}>
+                    <li key={route.name} className={`rounded-md px-4 py-2 ${isSelected(route.path) ? 'bg-gray-100' : ''}`}>
                         <Link key={route.name} to={route.path}>{route.name}</Link>
                     </li>
                 ))}
