@@ -11,6 +11,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import Header from "./components/navigation/header/Header";
 import { CartProvider } from "./contexts/CartContext";
+import TopBanner from "./components/navigation/top-banner/TopBanner";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -47,6 +48,10 @@ export default function App() {
   return (
     <CartProvider>
       <div className="min-h-screen flex flex-col">
+        {/* <TopBanner
+          message="Fast & free shipping on orders over $50"
+          bgColor="bg-lime-950"
+        /> */}
         <Header />
         <main className="flex-1 px-4 py-6 lg:px-14">
           <div className="max-w-screen-2xl mx-auto">
